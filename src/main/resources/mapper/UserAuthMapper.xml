@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxgy.authserver.model.dao.UserAuthMapper" >
+    <select id="getAll" resultType="com.sxgy.authserver.model.domain.UserAuth">
+        SELECT phone, wechat_mini_openid FROM user_auth
+    </select>
+    <select id="getUserByWechatMiniOpenid" resultType="com.sxgy.authserver.model.domain.UserAuth">
+        SELECT phone, wechat_mini_openid FROM user_auth WHERE wechat_mini_openid = #{wechat_mini_openid}
+    </select>
+    <insert id="saveUserAuth" parameterType="com.sxgy.authserver.model.domain.UserAuth">
+        INSERT INTO user_auth (id, wechat_mini_openid, wechat_mini_session_key) VALUES
+        (#{id}, #{wechatMiniOpenid}, #{wechatMiniSessionKey} )
+    </insert>
+</mapper>
