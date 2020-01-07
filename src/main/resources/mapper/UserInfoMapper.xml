@@ -2,7 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sxgy.authserver.model.dao.UserInfoMapper" >
     <select id="getAll" resultType="com.sxgy.authserver.model.domain.UserInfo">
-        SELECT name, age FROM user_info
+        SELECT nick_name FROM user_info
+    </select>
+
+    <select id="getUserByUserID" resultType="com.sxgy.authserver.model.domain.UserInfo">
+        SELECT nick_name FROM user_info WHERE user_id = #{userId}
     </select>
 
     <insert id="saveUserInfo" parameterType="com.sxgy.authserver.model.domain.UserInfo">

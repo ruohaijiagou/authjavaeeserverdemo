@@ -15,6 +15,6 @@ public class UserAuthTest {
 
     @Test
     public void testWechatMiniLogin() {
-        userAuthService.wechatMiniLogin("opAkfwJ_jPDgv028c7HX4R1M_w7k", "+HfmuDXrh45PwiRUpDiLXg==");
+        userAuthService.wechatMiniLogin("043hTIY02SuNwS0lN3212VOyY02hTIYk");
     }
 }

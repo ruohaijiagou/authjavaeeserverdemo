@@ -23,44 +23,20 @@ public class UserAuthController {
     @Autowired
     UserAuthService userAuthService;
 
-    @RequestMapping(value = "getAll")//method 不写的话，默认GET、POST都支持，根据前端方式自动适应
-/*@GetMapping("getAll")//@GetMapping是一个组合注解，是@RequestMapping(method = RequestMethod.GET)的缩写。
-@PostMapping("getAll")//@PostMapping是一个组合注解，是@RequestMapping(method = RequestMethod.POST)的缩写。*/
+    @RequestMapping("/wechat_mini_login")
     @ResponseBody
-    public List<UserAuth> getAll() {
-
-        List<UserAuth> all = userAuthService.getAll();
-        System.out.println(all);
-        return all;
-    }
-    @RequestMapping("/wechat_login")
-    @ResponseBody
-    public UserInfo wechatLogin(HttpServletRequest request, HttpServletResponse response,
-                                @RequestParam(name= "openid", required = true) String openid,
-                                @RequestParam(name = "sessionKey", required = true) String sessionKey
+    public UserInfo wechatMiniLogin(HttpServletRequest request, HttpServletResponse response,
+                                @RequestParam(name= "code", required = true) String code
     ) {
         UserInfo userInfo = null;
         // 登录业务逻辑，返回token
-        Token token = userAuthService.wechatMiniLogin(openid, sessionKey);
+        Token token = userAuthService.wechatMiniLogin(code);
         // 根据token，获取用户信息
         userInfo = userAuthService.getUserInfoByToken(token.getToken());
-        // 将token注入cookie
-        Cookie cookie = new Cookie("token", token.getToken());
-        // 存活时间60分钟
-        cookie.setMaxAge(60 * 60);
-        cookie.setPath("/");
-        cookie.setDomain("sxgy.com");
-        response.addCookie(cookie);
+        // 将token设置到header中
+        response.addHeader("token", token.getToken());
+        // 返回用户信息
         return userInfo;
     }
 
-    @RequestMapping("/user")
-    public String login3() {
-        return "views/user/user";
-    }
-
-    @RequestMapping("/dept")
-    public String dept() {
-        return "views/dept/dept";
-    }
 }

@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS `user_auth`;
 CREATE TABLE `user_auth` (
-`id` int(64) NOT NULL AUTO_INCREMENT,
+`id` bigint(64) NOT NULL AUTO_INCREMENT,
 `phone` varchar(30) NOT NULL DEFAULT '',
 `password` varchar(30) NOT NULL DEFAULT '',
-`wechat_mini_openid` varchar(30) NOT NULL DEFAULT '',
-`wechat_mini_session_key` varchar(60) NOT NULL DEFAULT '',
+`wechat_mini_openid` varchar(200) NOT NULL DEFAULT '',
+`wechat_mini_session_key` varchar(200) NOT NULL DEFAULT '',
 PRIMARY KEY (`id`),
 KEY `idx_phone` (`phone`),
 KEY `idx_miniopenid` (`wechat_mini_openid`)
